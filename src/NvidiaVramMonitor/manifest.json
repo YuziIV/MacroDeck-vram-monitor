@@ -28,7 +28,7 @@
   "repository": "https://github.com/YuziIV/MacroDeck-vram-monitor",
   "ai": {
     "interaction": false,
-    "generatedContent": false,
+    "generatedContent": true,
     "generatedAssets": true
   },
   "license": "MIT",
