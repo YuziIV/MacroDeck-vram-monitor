@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.macro-deck.app/plugin-manifest-v1.schema.json",
   "manifestVersion": 1,
-  "id": "com.yuziiv.nvidia-vram-monitor",
+  "id": "com.yussefabdelwahab.nvidia-smi-tool",
   "name": "NVIDIA VRAM Monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides live NVIDIA GPU memory variables for Macro Deck graphs.",
   "icon": "Assets/icon.svg",
   "entrypoints": {
