@@ -1,10 +1,14 @@
 # NVIDIA VRAM Monitor
 
-Macro Deck 3 plugin exposing live memory use of the first NVIDIA GPU as variables for widgets.
+Macro Deck 3 plugin exposing live memory use of a selected NVIDIA GPU as variables for widgets.
 
 ## Use
 
-Install the plugin in Macro Deck 3. Macro Deck starts and authorizes it. On the computer running Macro Deck, install an NVIDIA driver with `nvidia-smi` available on `PATH`. Complete the plugin's **Select an NVIDIA GPU** setup in Macro Deck with the zero-based GPU index (default 0); you can change it later. Add a History Graph widget and select `vram-used-percent` with a 0-100 range.
+Install the plugin from the Macro Deck Store in the **Macro Deck desktop app**; Macro Deck starts and authorizes it. To set it up:
+
+1. On the computer running Macro Deck, install an NVIDIA driver and check that `nvidia-smi` is available on `PATH`.
+2. Open **Integrations → NVIDIA VRAM Monitor** and choose **Select an NVIDIA GPU**. Enter its zero-based GPU index (`0` for the first GPU) and save. You can change it later in the integration settings.
+3. Add a **History Graph** widget and select `vram-used-percent` with a 0–100 range, or show one of the other variables below.
 
 | Variable | Meaning |
 | --- | --- |
