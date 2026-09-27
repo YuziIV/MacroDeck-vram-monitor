@@ -95,7 +95,7 @@ public sealed class PluginIntegration : IPluginIntegration, IVariableProvider, I
 			Process? process;
 			try
 			{
-				process = Process.Start(new ProcessStartInfo("nvidia-smi")
+				process = Process.Start(new ProcessStartInfo(FindNvidiaSmi())
 				{
 					RedirectStandardOutput = true,
 					UseShellExecute = false,
@@ -129,6 +129,21 @@ public sealed class PluginIntegration : IPluginIntegration, IVariableProvider, I
 		{
 			_refreshLock.Release();
 		}
+	}
+
+	private static string FindNvidiaSmi()
+	{
+		if (!OperatingSystem.IsWindows()) return "nvidia-smi";
+
+		// NVIDIA drivers do not always add NVSMI to PATH on Windows.
+		var windowsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+		var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+		var candidates = new[]
+		{
+			Path.Combine(windowsDirectory, "System32", "nvidia-smi.exe"),
+			Path.Combine(programFiles, "NVIDIA Corporation", "NVSMI", "nvidia-smi.exe"),
+		};
+		return candidates.FirstOrDefault(File.Exists) ?? "nvidia-smi";
 	}
 
 	private static bool TryParseReading(string output, out VramReading reading)

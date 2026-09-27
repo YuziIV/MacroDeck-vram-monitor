@@ -6,7 +6,7 @@ Macro Deck 3 plugin exposing live memory use of a selected NVIDIA GPU as variabl
 
 Install the plugin from the Macro Deck Store in the **Macro Deck desktop app**; Macro Deck starts and authorizes it. To set it up:
 
-1. On the computer running Macro Deck, install an NVIDIA driver and check that `nvidia-smi` is available on `PATH`.
+1. On the computer running Macro Deck, install an NVIDIA driver. On Linux, check that `nvidia-smi` is available on `PATH`. On Windows, the plugin also checks the standard driver locations automatically.
 2. Open **Integrations → NVIDIA VRAM Monitor** and choose **Select an NVIDIA GPU**. Enter its zero-based GPU index (`0` for the first GPU) and save. You can change it later in the integration settings.
 3. Add a **History Graph** widget and select `vram-used-percent` with a 0–100 range, or show one of the other variables below.
 
@@ -30,11 +30,11 @@ Requires the .NET 10 SDK and the [Macro Deck plugin CLI](https://docs.macro-deck
 dotnet build
 dotnet test
 macrodeck-plugin test --project src/NvidiaVramMonitor --report markdown --output conformance.md
-macrodeck-plugin build --source src/NvidiaVramMonitor --output ./artifacts
-macrodeck-plugin inspect --artifact ./artifacts/com.yussefabdelwahab.nvidia-smi-tool-1.0.1.macroDeckPlugin
+bash build-outside.sh  # on Windows: ./build-outside.ps1 in PowerShell (or bash build-outside.sh in Git Bash)
+macrodeck-plugin inspect --artifact ../MacroDeck-builds/vram-monitor/artifacts/com.yussefabdelwahab.nvidia-smi-tool-1.0.3.macroDeckPlugin
 ```
 
-Publish the source as a public repository at [YuziIV/MacroDeck-vram-monitor](https://github.com/YuziIV/MacroDeck-vram-monitor). In the [Creator Portal](https://docs.macro-deck.app/creator-portal/publish-plugin/), use a **Plugin / Integration** Project with Package ID `com.yussefabdelwahab.nvidia-smi-tool`, then connect this repository under **Builds**. Publish a new GitHub release tagged `v1.0.1`: `v1.0.0` points to the old package ID, so rerunning its workflow cannot fix the upload. Publishing the new release runs `.github/workflows/release.yml`, which builds and uploads the plugin without a publishing secret. In the Portal, select the build, create a release, add it to a submission and submit for review. Check that the Portal owner shown for the Project matches `publisher.name` in the manifest. The Store requires passing conformance reports on every declared platform and a supported Macro Deck SDK. Generated artifacts and local debug state are ignored by Git; upload source, not `bin/`, `obj/` or a local credential.
+Publish the source as a public repository at [YuziIV/MacroDeck-vram-monitor](https://github.com/YuziIV/MacroDeck-vram-monitor). In the [Creator Portal](https://docs.macro-deck.app/creator-portal/publish-plugin/), use a **Plugin / Integration** Project with Package ID `com.yussefabdelwahab.nvidia-smi-tool`, then connect this repository under **Builds**. Publish a new GitHub release tagged `v1.0.3`. Publishing the new release runs `.github/workflows/release.yml`, which builds and uploads the plugin without a publishing secret. In the Portal, select the build, create a release, add it to a submission and submit for review. Check that the Portal owner shown for the Project matches `publisher.name` in the manifest. The Store requires passing conformance reports on every declared platform and a supported Macro Deck SDK. Generated artifacts and local debug state are ignored by Git; upload source, not `bin/`, `obj/` or a local credential.
 
 Macro Deck packages are pinned together at `3.0.0-beta.14` in `Directory.Packages.props`, above the [Store SDK minimum](https://api.macro-deck.app/api/v1/public/dependency-policy/sdk) of `3.0.0-beta.12`. Check the build's dependency report under **Builds** in the Creator Portal before submitting for review.
 

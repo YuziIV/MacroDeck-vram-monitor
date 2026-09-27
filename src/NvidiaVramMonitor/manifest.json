@@ -3,7 +3,7 @@
   "manifestVersion": 1,
   "id": "com.yussefabdelwahab.nvidia-smi-tool",
   "name": "NVIDIA VRAM Monitor",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Provides live NVIDIA GPU memory variables for Macro Deck graphs.",
   "icon": "Assets/icon.svg",
   "entrypoints": {
